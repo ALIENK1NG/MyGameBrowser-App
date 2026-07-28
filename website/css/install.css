@@ -277,6 +277,11 @@ body {
   font-weight: 600;
 }
 
+.install-count strong {
+  color: var(--aurora);
+  font-variant-numeric: tabular-nums;
+}
+
 .download-card {
   background: var(--surface);
   border: 2px solid color-mix(in srgb, var(--accent) 55%, transparent);

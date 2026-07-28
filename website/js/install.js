@@ -138,6 +138,54 @@ async function applySiteLinks(manifest) {
   }
 }
 
+async function fetchLiveInstallCount(manifest) {
+  const wrap = document.getElementById("installCountWrap");
+  const countEl = document.getElementById("installCount");
+  if (!wrap || !countEl) return;
+
+  const gp = manifest?.githubPages || {};
+  const owner = gp.owner || "ALIENK1NG";
+  const repo = gp.repo || "MyGameBrowser-App";
+  const apiUrl = `https://api.github.com/repos/${owner}/${repo}/releases?per_page=20`;
+
+  try {
+    const res = await fetch(apiUrl, {
+      headers: { Accept: "application/vnd.github+json" },
+      cache: "no-store"
+    });
+    if (!res.ok) throw new Error(`GitHub API ${res.status}`);
+    const releases = await res.json();
+    if (!Array.isArray(releases)) throw new Error("Unexpected releases payload");
+
+    let total = 0;
+    for (const release of releases) {
+      for (const asset of release.assets || []) {
+        const name = String(asset.name || "").toLowerCase();
+        // Count installer / portable downloads (skip yml, blockmap, checksums).
+        const isInstaller =
+          name.endsWith(".exe") ||
+          name.endsWith(".zip") ||
+          name.endsWith(".appimage") ||
+          name.endsWith(".deb");
+        const isMeta =
+          name.endsWith(".yml") ||
+          name.endsWith(".blockmap") ||
+          name.includes("checksum");
+        if (isInstaller && !isMeta) {
+          total += Number(asset.download_count) || 0;
+        }
+      }
+    }
+
+    countEl.textContent = total.toLocaleString();
+    wrap.hidden = false;
+    wrap.title = "Live download count from GitHub Releases";
+  } catch (err) {
+    console.warn("Install count unavailable", err);
+    wrap.hidden = true;
+  }
+}
+
 async function renderDownloads(manifest) {
   await applySiteLinks(manifest);
   const versionEl = document.getElementById("appVersion");
@@ -282,6 +330,7 @@ async function init() {
     const manifest = await res.json();
     await renderDownloads(manifest);
     await renderChecksums(manifest);
+    await fetchLiveInstallCount(manifest);
   } catch (err) {
     console.warn("Could not load downloads.json", err);
     const noteEl = document.getElementById("downloadNote");
