@@ -12,25 +12,25 @@
   "windows": {
     "installer": {
       "label": "Windows installer (recommended)",
-      "file": "Alienizor+ Setup 1.1.0.exe",
-      "url": "https://github.com/ALIENK1NG/MyGameBrowser-App/releases/download/v1.1.0/Alienizor%2B%20Setup%201.1.0.exe"
+      "file": "alienizor-plus-setup-1.1.0.exe",
+      "url": "https://github.com/ALIENK1NG/MyGameBrowser-App/releases/download/v1.1.0/alienizor-plus-setup-1.1.0.exe"
     },
     "portable": {
       "label": "Windows portable (.exe)",
-      "file": "Alienizor+ 1.1.0.exe",
-      "url": "https://github.com/ALIENK1NG/MyGameBrowser-App/releases/download/v1.1.0/Alienizor%2B%201.1.0.exe"
+      "file": "alienizor-plus-portable-1.1.0.exe",
+      "url": "https://github.com/ALIENK1NG/MyGameBrowser-App/releases/download/v1.1.0/alienizor-plus-portable-1.1.0.exe"
     },
     "portableZip": {
       "label": "Windows portable (.zip)",
-      "file": "Alienizor+-1.1.0-windows-portable.zip",
-      "url": "https://github.com/ALIENK1NG/MyGameBrowser-App/releases/download/v1.1.0/Alienizor%2B-1.1.0-windows-portable.zip"
+      "file": "alienizor-plus-1.1.0-windows-portable.zip",
+      "url": "https://github.com/ALIENK1NG/MyGameBrowser-App/releases/download/v1.1.0/alienizor-plus-1.1.0-windows-portable.zip"
     }
   },
   "linux": {
     "appimage": {
       "label": "Linux AppImage",
-      "file": "Alienizor+-1.1.0.AppImage",
-      "url": "https://github.com/ALIENK1NG/MyGameBrowser-App/releases/download/v1.1.0/Alienizor%2B-1.1.0.AppImage"
+      "file": "alienizor-plus-1.1.0.AppImage",
+      "url": "https://github.com/ALIENK1NG/MyGameBrowser-App/releases/download/v1.1.0/alienizor-plus-1.1.0.AppImage"
     },
     "deb": {
       "label": "Linux .deb (Debian/Ubuntu)",
@@ -39,5 +39,5 @@
     }
   },
   "plusCheckoutUrl": "",
-  "_comment": "Run npm run website:downloads to copy builds from Alienizor-Plus/dist into website/downloads/"
+  "_comment": "Release asset names stay ASCII (no spaces/+). Local website/downloads/ can still use branded names for offline preview."
 }

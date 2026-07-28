@@ -36,6 +36,27 @@ const ver = readVersion();
 const releaseTag = `v${ver}`;
 const releaseBase = `https://github.com/ALIENK1NG/MyGameBrowser-App/releases/download/${releaseTag}`;
 
+function releaseAssetName(kind) {
+  switch (kind) {
+    case "installer":
+      return `alienizor-plus-setup-${ver}.exe`;
+    case "portable":
+      return `alienizor-plus-portable-${ver}.exe`;
+    case "portableZip":
+      return `alienizor-plus-${ver}-windows-portable.zip`;
+    case "appimage":
+      return `alienizor-plus-${ver}.AppImage`;
+    case "deb":
+      return `alienizor-plus_${ver}_amd64.deb`;
+    default:
+      return "";
+  }
+}
+
+function encodeAsset(name) {
+  return encodeURIComponent(name);
+}
+
 function pickDistDir() {
   const plusInstaller = path.join(plusDist, `Alienizor+ Setup ${ver}.exe`);
   if (existsSync(plusInstaller)) return plusDist;
@@ -47,10 +68,6 @@ function pickDistDir() {
 }
 
 const distDir = pickDistDir();
-
-function encodeAsset(name) {
-  return encodeURIComponent(name);
-}
 
 function syncDownloadsManifest() {
   const manifestPath = path.join(root, "website", "downloads.json");
@@ -66,32 +83,38 @@ function syncDownloadsManifest() {
     branch: "main"
   };
   // Prefer GitHub Releases for large binaries; keep local downloads/ as fallback/dev.
+  // Asset names must stay ASCII (no spaces / +) so GitHub does not rename them.
   manifest.releasesBaseUrl = `${releaseBase}/`;
   if (manifest.windows) {
     if (manifest.windows.installer) {
-      manifest.windows.installer.file = `Alienizor+ Setup ${ver}.exe`;
+      const file = releaseAssetName("installer");
+      manifest.windows.installer.file = file;
       manifest.windows.installer.label = "Windows installer (recommended)";
-      manifest.windows.installer.url = `${releaseBase}/${encodeAsset(`Alienizor+ Setup ${ver}.exe`)}`;
+      manifest.windows.installer.url = `${releaseBase}/${encodeAsset(file)}`;
     }
     if (manifest.windows.portable) {
-      manifest.windows.portable.file = `Alienizor+ ${ver}.exe`;
+      const file = releaseAssetName("portable");
+      manifest.windows.portable.file = file;
       manifest.windows.portable.label = "Windows portable (.exe)";
-      manifest.windows.portable.url = `${releaseBase}/${encodeAsset(`Alienizor+ ${ver}.exe`)}`;
+      manifest.windows.portable.url = `${releaseBase}/${encodeAsset(file)}`;
     }
     if (manifest.windows.portableZip) {
-      manifest.windows.portableZip.file = `Alienizor+-${ver}-windows-portable.zip`;
+      const file = releaseAssetName("portableZip");
+      manifest.windows.portableZip.file = file;
       manifest.windows.portableZip.label = "Windows portable (.zip)";
-      manifest.windows.portableZip.url = `${releaseBase}/${encodeAsset(`Alienizor+-${ver}-windows-portable.zip`)}`;
+      manifest.windows.portableZip.url = `${releaseBase}/${encodeAsset(file)}`;
     }
   }
   if (manifest.linux) {
     if (manifest.linux.appimage) {
-      manifest.linux.appimage.file = `Alienizor+-${ver}.AppImage`;
-      manifest.linux.appimage.url = `${releaseBase}/${encodeAsset(`Alienizor+-${ver}.AppImage`)}`;
+      const file = releaseAssetName("appimage");
+      manifest.linux.appimage.file = file;
+      manifest.linux.appimage.url = `${releaseBase}/${encodeAsset(file)}`;
     }
     if (manifest.linux.deb) {
-      manifest.linux.deb.file = `alienizor-plus_${ver}_amd64.deb`;
-      manifest.linux.deb.url = `${releaseBase}/${encodeAsset(`alienizor-plus_${ver}_amd64.deb`)}`;
+      const file = releaseAssetName("deb");
+      manifest.linux.deb.file = file;
+      manifest.linux.deb.url = `${releaseBase}/${encodeAsset(file)}`;
     }
   }
   writeFileSync(manifestPath, JSON.stringify(manifest, null, 2) + "\n", "utf8");
