@@ -138,11 +138,82 @@ async function applySiteLinks(manifest) {
   }
 }
 
+async function loadMetricsConfig() {
+  try {
+    const res = await fetch("metrics-config.json", { cache: "no-store" });
+    if (!res.ok) return null;
+    return await res.json();
+  } catch {
+    return null;
+  }
+}
+
+async function supabaseRpc(config, fnName, body = {}) {
+  if (!config?.supabaseUrl || !config?.anonKey || !fnName) return null;
+  const res = await fetch(`${String(config.supabaseUrl).replace(/\/$/, "")}/rest/v1/rpc/${fnName}`, {
+    method: "POST",
+    headers: {
+      apikey: config.anonKey,
+      Authorization: `Bearer ${config.anonKey}`,
+      "Content-Type": "application/json",
+      Prefer: "return=representation"
+    },
+    body: JSON.stringify(body)
+  });
+  if (!res.ok) throw new Error(`RPC ${fnName} failed (${res.status})`);
+  return res.json();
+}
+
+function downloadInstallId() {
+  try {
+    const key = "alienizor_download_install_id";
+    let id = localStorage.getItem(key);
+    if (!id) {
+      id = (crypto.randomUUID && crypto.randomUUID()) || `dl-${Date.now()}-${Math.random().toString(16).slice(2)}`;
+      localStorage.setItem(key, id);
+    }
+    return id;
+  } catch {
+    return `dl-${Date.now()}`;
+  }
+}
+
+async function recordWebsiteDownload(manifest) {
+  const config = await loadMetricsConfig();
+  if (!config) return null;
+  const rpc = config.rpcRecord || "record_app_install";
+  return supabaseRpc(config, rpc, {
+    p_install_id: downloadInstallId(),
+    p_source: "download"
+  });
+}
+
 async function fetchLiveInstallCount(manifest) {
   const wrap = document.getElementById("installCountWrap");
   const countEl = document.getElementById("installCount");
   if (!wrap || !countEl) return;
 
+  const show = (n) => {
+    countEl.textContent = Number(n || 0).toLocaleString();
+    wrap.hidden = false;
+    wrap.title = "Live installs (downloads + first launches)";
+  };
+
+  try {
+    const config = await loadMetricsConfig();
+    if (config?.supabaseUrl && config?.anonKey) {
+      const rpc = config.rpcGet || "get_app_install_count";
+      const count = await supabaseRpc(config, rpc, {});
+      if (typeof count === "number" || typeof count === "string") {
+        show(count);
+        return;
+      }
+    }
+  } catch (err) {
+    console.warn("Supabase install count unavailable", err);
+  }
+
+  // Fallback: GitHub Release download totals
   const gp = manifest?.githubPages || {};
   const owner = gp.owner || "ALIENK1NG";
   const repo = gp.repo || "MyGameBrowser-App";
@@ -161,7 +232,6 @@ async function fetchLiveInstallCount(manifest) {
     for (const release of releases) {
       for (const asset of release.assets || []) {
         const name = String(asset.name || "").toLowerCase();
-        // Count installer / portable downloads (skip yml, blockmap, checksums).
         const isInstaller =
           name.endsWith(".exe") ||
           name.endsWith(".zip") ||
@@ -177,13 +247,41 @@ async function fetchLiveInstallCount(manifest) {
       }
     }
 
-    countEl.textContent = total.toLocaleString();
-    wrap.hidden = false;
-    wrap.title = "Live download count from GitHub Releases";
+    show(total);
   } catch (err) {
     console.warn("Install count unavailable", err);
     wrap.hidden = true;
   }
+}
+
+function wireDownloadTracking() {
+  const ids = [
+    "heroDownloadBtn",
+    "dl-win-installer",
+    "dl-win-portable",
+    "dl-win-portable-zip",
+    "dl-linux-appimage",
+    "dl-linux-deb"
+  ];
+  ids.forEach((id) => {
+    const el = document.getElementById(id);
+    if (!el || el.dataset.installTracked === "1") return;
+    el.dataset.installTracked = "1";
+    el.addEventListener("click", () => {
+      if (el.classList.contains("is-disabled")) return;
+      recordWebsiteDownload()
+        .then((count) => {
+          if (count == null) return;
+          const countEl = document.getElementById("installCount");
+          const wrap = document.getElementById("installCountWrap");
+          if (countEl && wrap) {
+            countEl.textContent = Number(count).toLocaleString();
+            wrap.hidden = false;
+          }
+        })
+        .catch(() => {});
+    });
+  });
 }
 
 async function renderDownloads(manifest) {
@@ -331,6 +429,7 @@ async function init() {
     await renderDownloads(manifest);
     await renderChecksums(manifest);
     await fetchLiveInstallCount(manifest);
+    wireDownloadTracking();
   } catch (err) {
     console.warn("Could not load downloads.json", err);
     const noteEl = document.getElementById("downloadNote");

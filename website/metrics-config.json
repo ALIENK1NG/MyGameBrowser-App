@@ -1,0 +1,6 @@
+﻿{
+    "rpcRecord":  "record_app_install",
+    "supabaseUrl":  "https://znydhuuzaxabtwutakim.supabase.co",
+    "anonKey":  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpueWRodXV6YXhhYnR3dXRha2ltIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA1MDA4MzQsImV4cCI6MjA5NjA3NjgzNH0.1IU8VvnZI27NDjf2VAMlHyDo9YJIN421oVOt6eaT7ew",
+    "rpcGet":  "get_app_install_count"
+}
