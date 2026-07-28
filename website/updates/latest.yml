@@ -1,8 +1,8 @@
 version: 1.1.0
 files:
   - url: alienizor-plus-setup-1.1.0.exe
-    sha512: zJfqK3ERrLe99DF49lMBmL5MYgs3Ug4uwcgTBgHxM+nOQulakemgb+im+FI7Iz7yiXU+zqPenslIiDD3SXLeeQ==
-    size: 82911749
+    sha512: cgvGjPcN28zpjfSaAebAVFqmZ7n9E6tjoGeV6QrpV+8jXeRFvV0xTIsn80I27d3BQtPBvBq36IKkdJrBDWOCxw==
+    size: 82899535
 path: alienizor-plus-setup-1.1.0.exe
-sha512: zJfqK3ERrLe99DF49lMBmL5MYgs3Ug4uwcgTBgHxM+nOQulakemgb+im+FI7Iz7yiXU+zqPenslIiDD3SXLeeQ==
-releaseDate: '2026-07-28T19:22:44.807Z'
+sha512: cgvGjPcN28zpjfSaAebAVFqmZ7n9E6tjoGeV6QrpV+8jXeRFvV0xTIsn80I27d3BQtPBvBq36IKkdJrBDWOCxw==
+releaseDate: '2026-07-28T20:59:09.445Z'
