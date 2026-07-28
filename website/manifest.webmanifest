@@ -1,0 +1,16 @@
+{
+  "name": "Alienizor",
+  "short_name": "Alienizor",
+  "description": "Alien-themed game browser and launcher",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#0f001a",
+  "theme_color": "#a600ff",
+  "icons": [
+    {
+      "src": "assets/alienizor-logo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

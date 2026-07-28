@@ -1,0 +1,8 @@
+# Keep large binaries out of GitHub Pages deploys when present locally.
+*.exe
+*.zip
+*.AppImage
+*.deb
+*.blockmap
+!.gitkeep
+!README.md

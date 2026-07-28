@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Download Alienizor+ for Windows — alien-themed game launcher with Live Lounge, friends, voice calls, Steam/Epic/GOG import, and Discord Rich Presence.">
+  <meta name="keywords" content="Alienizor+, Alienizor, game launcher, Live Lounge, Steam library, Windows game launcher">
+  <meta name="author" content="Alienizor">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#00e5ff">
+  <link rel="canonical" id="canonicalLink" href="https://harns.github.io/MyGameBrowser-App/">
+  <title>Alienizor+ — Download &amp; Install for Windows</title>
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Alienizor+">
+  <meta property="og:title" content="Alienizor+ — Download for Windows">
+  <meta property="og:description" content="Install Alienizor+. Game library, Live Lounge, friends, and voice — one neon command center.">
+  <meta property="og:url" id="ogUrl" content="https://harns.github.io/MyGameBrowser-App/">
+  <meta property="og:image" id="ogImage" content="https://harns.github.io/MyGameBrowser-App/assets/alienizor-logo.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Alienizor+ — Download">
+  <meta name="twitter:description" content="Download the Alienizor+ installer for Windows.">
+  <meta name="twitter:image" id="twitterImage" content="https://harns.github.io/MyGameBrowser-App/assets/alienizor-logo.png">
+  <link rel="icon" href="assets/alienizor-icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/alienizor-logo.png">
+  <link rel="manifest" href="manifest.webmanifest">
+  <script type="application/ld+json" id="structuredData">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Alienizor+",
+    "applicationCategory": "GameApplication",
+    "operatingSystem": "Windows",
+    "description": "Alien-themed game browser and launcher with Live Lounge, friends, voice calls, Steam/Epic/GOG import, and Discord Rich Presence.",
+    "softwareVersion": "1.1.0",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "downloadUrl": "https://harns.github.io/MyGameBrowser-App/",
+    "url": "https://harns.github.io/MyGameBrowser-App/"
+  }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/install.css">
+</head>
+<body>
+  <div class="stars" aria-hidden="true"></div>
+  <div class="aurora" aria-hidden="true"></div>
+
+  <div class="shell">
+    <header class="site-header">
+      <a class="brand" href="#top">
+        <img src="assets/alienizor-logo.png" width="44" height="44" alt="">
+        <span>
+          <span class="brand-name">Alienizor+</span>
+          <span class="brand-tag">Game browser</span>
+        </span>
+      </a>
+      <nav class="nav" aria-label="Page sections">
+        <a href="#download">Download</a>
+        <a href="#install">Install</a>
+        <a href="#features">Features</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero">
+        <div class="hero-brand-mark" aria-hidden="true">
+          <img class="hero-logo" src="assets/alienizor-logo.png" width="280" height="280" alt="">
+        </div>
+        <div class="hero-copy">
+          <p class="hero-brand-word">Alienizor+</p>
+          <h1>Install your command center</h1>
+          <p class="lead">
+            One Windows app for your game library, Live Lounge friends, and voice — neon and ready.
+          </p>
+          <div class="hero-cta">
+            <a class="btn btn-primary" id="heroDownloadBtn" href="#download">Download for Windows</a>
+            <a class="btn btn-secondary" href="#install">Install steps</a>
+          </div>
+          <p class="version-pill">
+            Version <strong id="appVersion">1.1.0</strong>
+            · <span id="releaseDate">Released <strong>July 2026</strong></span>
+          </p>
+        </div>
+      </section>
+
+      <section class="download-section" id="download">
+        <div class="download-card" aria-labelledby="download-heading">
+          <h2 id="download-heading">Download Alienizor+</h2>
+          <p class="download-intro">Windows installer recommended. Same app as version <strong id="dlVersion">1.1.0</strong>.</p>
+
+          <div class="platform-tabs" role="tablist" aria-label="Choose platform">
+            <button type="button" class="tab is-active" role="tab" data-platform="windows" aria-selected="true">Windows</button>
+            <button type="button" class="tab" role="tab" data-platform="linux" aria-selected="false">Linux</button>
+          </div>
+
+          <div class="tab-panel is-active" id="panel-windows" role="tabpanel">
+            <ul class="download-list">
+              <li class="download-item recommended" data-dl-key="installer">
+                <div class="download-meta">
+                  <strong>Installer <span class="dl-badge">Recommended</span></strong>
+                  <span>Setup wizard · desktop shortcut · uninstaller</span>
+                  <span class="dl-size" id="size-win-installer"></span>
+                </div>
+                <a class="btn btn-primary" id="dl-win-installer" download>Download Setup</a>
+              </li>
+              <li class="download-item" data-dl-key="portable">
+                <div class="download-meta">
+                  <strong>Portable .exe</strong>
+                  <span>Single file — run from any folder or USB</span>
+                  <span class="dl-size" id="size-win-portable"></span>
+                </div>
+                <a class="btn btn-secondary" id="dl-win-portable" download>Download .exe</a>
+              </li>
+              <li class="download-item" data-dl-key="portableZip">
+                <div class="download-meta">
+                  <strong>Portable .zip</strong>
+                  <span>Unzip and run — no installer</span>
+                  <span class="dl-size" id="size-win-portable-zip"></span>
+                </div>
+                <a class="btn btn-secondary" id="dl-win-portable-zip" download>Download .zip</a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="tab-panel" id="panel-linux" role="tabpanel">
+            <ul class="download-list">
+              <li class="download-item recommended">
+                <div class="download-meta">
+                  <strong>AppImage</strong>
+                  <span>Most distros — make executable and run</span>
+                  <span class="dl-size" id="size-linux-appimage"></span>
+                </div>
+                <a class="btn btn-primary" id="dl-linux-appimage" download>Download</a>
+              </li>
+              <li class="download-item">
+                <div class="download-meta">
+                  <strong>.deb package</strong>
+                  <span>Debian, Ubuntu, Mint, Pop!_OS</span>
+                  <span class="dl-size" id="size-linux-deb"></span>
+                </div>
+                <a class="btn btn-secondary" id="dl-linux-deb" download>Download</a>
+              </li>
+            </ul>
+          </div>
+
+          <p class="os-hint" id="osHint"></p>
+          <div class="unavailable-note" id="downloadNote" hidden></div>
+          <p class="chrome-hint">
+            Chrome may warn about unsigned downloads — normal for indie apps.
+            Click <strong>Keep anyway</strong>, then verify under <a href="#verify">Verify download</a>.
+          </p>
+        </div>
+      </section>
+
+      <section id="install">
+        <h2 class="section-title">How to install</h2>
+        <p class="section-sub">About a minute. Windows SmartScreen may ask you to confirm on first run.</p>
+        <ol class="steps">
+          <li>
+            <div>
+              <strong>Download the installer</strong><br>
+              Get <code>Alienizor+ Setup 1.1.0.exe</code> above.
+            </div>
+          </li>
+          <li>
+            <div>
+              <strong>Run setup</strong><br>
+              Finish the wizard. Desktop and Start menu shortcuts are created for you.
+            </div>
+          </li>
+          <li>
+            <div>
+              <strong>SmartScreen prompt?</strong><br>
+              Click <strong>More info</strong> → <strong>Run anyway</strong>. Expected for independent publishers.
+            </div>
+          </li>
+          <li>
+            <div>
+              <strong>Open Alienizor+</strong><br>
+              Sign up with email, pick a display name, then join Live Lounge or import your games.
+            </div>
+          </li>
+        </ol>
+      </section>
+
+      <section id="features">
+        <h2 class="section-title">Inside Alienizor+</h2>
+        <p class="section-sub">Library, lounge, and voice — built for playing with friends.</p>
+        <div class="features">
+          <article class="feature">
+            <h3>Game library</h3>
+            <p>Scan Steam, Epic, GOG, installed games, and ROM folders into one neon shelf.</p>
+          </article>
+          <article class="feature">
+            <h3>Live Lounge</h3>
+            <p>Servers with join passwords, text channels, and friend requests by lounge name.</p>
+          </article>
+          <article class="feature">
+            <h3>Group voice</h3>
+            <p>Join voice channels with mic on and camera optional — up to 20 in a call.</p>
+          </article>
+          <article class="feature">
+            <h3>Couch &amp; Discord</h3>
+            <p>Controller-friendly layouts plus Discord Rich Presence when you launch a game.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="requirements">
+        <h2 class="section-title">System requirements</h2>
+        <div class="req-grid">
+          <div class="req-card">
+            <h3>Windows</h3>
+            <ul>
+              <li>Windows 10 or 11 (64-bit)</li>
+              <li>4 GB RAM minimum · 8 GB recommended</li>
+              <li>~300 MB disk space</li>
+              <li>Mic permission for Live Lounge voice</li>
+            </ul>
+          </div>
+          <div class="req-card">
+            <h3>Optional</h3>
+            <ul>
+              <li>Steam / Epic / GOG for library import</li>
+              <li>Account email for lounge sign-up</li>
+              <li>Internet for Live Lounge &amp; voice</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="verify">
+        <h2 class="section-title">Verify your download</h2>
+        <p class="section-sub">Compare the SHA-256 hash after downloading.</p>
+        <div class="checksum-panel" id="checksumPanel" hidden>
+          <p class="hint">PowerShell: <code>Get-FileHash ".\Alienizor+ Setup 1.1.0.exe" -Algorithm SHA256</code></p>
+          <ul class="checksum-list" id="checksumList"></ul>
+        </div>
+      </section>
+
+      <section id="faq">
+        <h2 class="section-title">FAQ</h2>
+        <div class="faq">
+          <details open>
+            <summary>How do I install Alienizor+?</summary>
+            <p>Download <strong>Alienizor+ Setup</strong>, run it, then open Alienizor+ from the desktop shortcut. Use <strong>More info → Run anyway</strong> if SmartScreen appears.</p>
+          </details>
+          <details>
+            <summary>Chrome says the download might be dangerous</summary>
+            <p>Chrome flags new unsigned apps. Alienizor+ is safe — verify with the SHA-256 hashes above. In Chrome: download menu → <strong>Keep anyway</strong>.</p>
+          </details>
+          <details>
+            <summary>How do friends join my server?</summary>
+            <p>Create a server with a 4–10 digit password, then they use <strong>Join server with code</strong> and enter the exact server name plus password once.</p>
+          </details>
+          <details>
+            <summary>Where is my library saved?</summary>
+            <p>Game data lives under your Windows app data folder for Alienizor+. Uninstalling does not wipe your library by default.</p>
+          </details>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>© 2026 Alienizor · Alienizor+ game browser &amp; launcher</p>
+      <p class="footer-links">
+        <a id="repoLink" href="https://github.com/Harns/MyGameBrowser-App" rel="noopener">Source</a>
+        <span aria-hidden="true">·</span>
+        <a href="#verify">Verify downloads</a>
+        <span aria-hidden="true">·</span>
+        <a href="#faq">FAQ</a>
+      </p>
+    </footer>
+  </div>
+
+  <script src="js/install.js" defer></script>
+</body>
+</html>

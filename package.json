@@ -1,0 +1,163 @@
+{
+  "name": "alienizor",
+  "version": "1.1.0",
+  "description": "Alien-themed game browser and launcher",
+  "author": "Alienizor",
+  "main": "main.js",
+  "scripts": {
+    "start": "node scripts/start-app.mjs",
+    "pack": "node scripts/pack-win.mjs",
+    "dist": "electron-builder",
+    "dist:win": "node scripts/dist-win.mjs",
+    "sign:win": "node scripts/sign-win-artifacts.mjs",
+    "sign:verify": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/verify-signature.ps1",
+    "setup:signing": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/setup-signing.ps1",
+    "dist:publish": "electron-builder --publish never",
+    "website:downloads": "node scripts/sync-website-downloads.mjs",
+    "website:ready": "npm run dist:win && npm run website:downloads",
+    "live:sync": "node scripts/live-release-sync.mjs",
+    "desktop-shortcut": "powershell -ExecutionPolicy Bypass -File \"Install Desktop Shortcut.ps1\"",
+    "pin-taskbar": "powershell -ExecutionPolicy Bypass -File \"Pin to Taskbar.ps1\"",
+    "fix-taskbar": "node scripts/setup-dev-launcher.mjs && powershell -ExecutionPolicy Bypass -File \"Install Desktop Shortcut.ps1\" && powershell -ExecutionPolicy Bypass -File \"Pin to Taskbar.ps1\"",
+    "verify-taskbar": "powershell -ExecutionPolicy Bypass -File \"Verify Taskbar.ps1\"",
+    "build-icon": "powershell -ExecutionPolicy Bypass -File \"Remove-LogoBackground.ps1\"; powershell -ExecutionPolicy Bypass -File \"Build-Icon.ps1\"",
+    "build:modules": "node scripts/build-modules.mjs",
+    "build:all": "node scripts/build-modules.mjs",
+    "smoke": "node scripts/smoke-launch.cjs",
+    "site:seo": "node scripts/generate-site-seo.mjs",
+    "website": "node scripts/serve-website.mjs",
+    "website:share": "node scripts/share-website.mjs",
+    "publish:github": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/first-push-github.ps1",
+    "publish:website": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/publish-website.ps1",
+    "publish:website:url": "node scripts/publish-website-url.mjs",
+    "publish:release": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/publish-release.ps1",
+    "check:portable": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/Check-PortablePaths.ps1",
+    "check:premium": "node scripts/check-premium.mjs",
+    "repack": "node scripts/repack-asar.mjs",
+    "setup:dev-launcher": "node scripts/setup-dev-launcher.mjs",
+    "setup:checkout": "node scripts/setup-checkout.mjs",
+    "postinstall": "node scripts/setup-dev-launcher.mjs"
+  },
+  "dependencies": {
+    "discord-rpc": "^4.0.1",
+    "electron-updater": "^6.8.3"
+  },
+  "build": {
+    "appId": "com.alienizor.app",
+    "productName": "Alienizor",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "main.js",
+      "preload.js",
+      "mini-preload.js",
+      "index.html",
+      "checkout.html",
+      "upsell.html",
+      "mini.html",
+      "overlay-preload.js",
+      "overlay.html",
+      "overlay-window.js",
+      "game-scanner.js",
+      "heroic-scanner.js",
+      "lutris-scanner.js",
+      "itch-scanner.js",
+      "library-import.js",
+      "metadata-enricher.js",
+      "rom-scanner.js",
+      "emulator-config.js",
+      "retro-artwork.js",
+      "plugin-loader.js",
+      "discord-presence.js",
+      "discord-party.js",
+      "alien-lounge.js",
+      "media-gallery.js",
+      "community-themes.js",
+      "auto-updater.js",
+      "license-manager.js",
+      "lil-alien.js",
+      "genre-classifier.js",
+      "grid-cover.js",
+      "game-stats.js",
+      "platform-sync.js",
+      "plugins/**/*",
+      "shared/**/*",
+      "src/**/*",
+      "src/html/**/*",
+      "alienizor.ico",
+      "alienizor-logo.png",
+      "alienizor-icon.svg",
+      "lil-alien-icon.svg",
+      "discord_app.id.example",
+      "igdb_client.id.example",
+      "igdb_client.secret.example",
+      "update-feed.example.json",
+      "website/downloads.json",
+      "supabase.url.example",
+      "supabase.anon.key.example",
+      "lemon_squeezy.checkout.url.example",
+      "lemon_squeezy.api.key.example",
+      "lemon_squeezy.store.id.example",
+      "lemon_squeezy.variant.id.example",
+      "lemon_squeezy.store.slug.example",
+      "!Alienizor.html",
+      "!scripts/**",
+      "!test-*",
+      "!dist/**",
+      "!*.ps1",
+      "!*.bat",
+      "!*.vbs",
+      "package.json",
+      "node_modules/discord-rpc/**",
+      "node_modules/ws/**",
+      "node_modules/node-fetch/**",
+      "node_modules/electron-updater/**"
+    ],
+    "asar": true,
+    "win": {
+      "target": [
+        "nsis",
+        "portable"
+      ],
+      "icon": "alienizor.ico",
+      "executableName": "Alienizor",
+      "publisherName": "Alienizor",
+      "signDlls": false,
+      "verifyUpdateCodeSignature": false
+    },
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb"
+      ],
+      "category": "Game",
+      "icon": "alienizor-logo.png"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Alienizor"
+    },
+    "protocols": [
+      {
+        "name": "Alienizor Auth",
+        "schemes": ["alienizor"]
+      }
+    ],
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "Harns",
+        "repo": "MyGameBrowser-App"
+      }
+    ]
+  },
+  "devDependencies": {
+    "electron": "^31.7.7",
+    "electron-builder": "^25.1.8",
+    "rcedit": "^4.0.1"
+  }
+}

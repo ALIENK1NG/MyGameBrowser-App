@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Alienizor">
+  <defs>
+    <linearGradient id="chip" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1a0038"/>
+      <stop offset="100%" stop-color="#0a0014"/>
+    </linearGradient>
+    <linearGradient id="glow" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#a600ff"/>
+      <stop offset="50%" stop-color="#00ff9d"/>
+      <stop offset="100%" stop-color="#a600ff"/>
+    </linearGradient>
+    <filter id="soft" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="1.5" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <!-- Power lines -->
+  <g stroke="url(#glow)" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.9">
+    <path d="M64 8 L64 28 M64 100 L64 120 M8 64 L28 64 M100 64 L120 64"/>
+    <path d="M22 22 L38 38 M106 22 L90 38 M22 106 L38 90 M106 106 L90 90" opacity="0.7"/>
+    <path d="M64 8 L48 20 M64 8 L80 20 M64 120 L48 108 M64 120 L80 108" opacity="0.55"/>
+  </g>
+  <circle cx="64" cy="64" r="46" fill="none" stroke="#a600ff" stroke-width="1" opacity="0.25"/>
+  <!-- Alien chip body -->
+  <rect x="36" y="36" width="56" height="56" rx="6" fill="url(#chip)" stroke="#a600ff" stroke-width="2.5" filter="url(#soft)"/>
+  <rect x="42" y="42" width="44" height="44" rx="4" fill="none" stroke="#00ff9d" stroke-width="1" opacity="0.5"/>
+  <!-- Die / core -->
+  <rect x="50" y="50" width="28" height="28" rx="3" fill="#120020" stroke="#a600ff" stroke-width="1.5"/>
+  <path d="M58 58 h12 M58 64 h12 M58 70 h8" stroke="#00ff9d" stroke-width="1.5" stroke-linecap="round" opacity="0.85"/>
+  <!-- Alien glyph nodes -->
+  <circle cx="48" cy="48" r="2.5" fill="#a600ff"/>
+  <circle cx="80" cy="48" r="2.5" fill="#a600ff"/>
+  <circle cx="48" cy="80" r="2.5" fill="#00ff9d"/>
+  <circle cx="80" cy="80" r="2.5" fill="#00ff9d"/>
+  <!-- Pins -->
+  <g fill="#a600ff" opacity="0.8">
+    <rect x="60" y="30" width="8" height="6" rx="1"/><rect x="60" y="92" width="8" height="6" rx="1"/>
+    <rect x="30" y="60" width="6" height="8" rx="1"/><rect x="92" y="60" width="6" height="8" rx="1"/>
+  </g>
+</svg>

@@ -1,0 +1,25 @@
+{
+  "name": "Alienizor+",
+  "tagline": "Premium alien-themed game browser and launcher",
+  "description": "Download Alienizor+ for Windows — scan Steam, Epic, GOG, and ROM folders. Live Lounge with friends, voice calls, themes, couch mode, and Discord Rich Presence.",
+  "keywords": [
+    "Alienizor",
+    "Alienizor+",
+    "game launcher",
+    "game browser",
+    "Steam library",
+    "Epic Games",
+    "GOG",
+    "ROM launcher",
+    "Windows game launcher",
+    "Live Lounge"
+  ],
+  "publicUrl": "https://alienk1ng.github.io/MyGameBrowser-App/",
+  "customDomain": "",
+  "twitter": "",
+  "contactEmail": "",
+  "githubPages": {
+    "owner": "ALIENK1NG",
+    "repo": "MyGameBrowser-App"
+  }
+}

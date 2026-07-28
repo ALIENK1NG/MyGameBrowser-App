@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://alienk1ng.github.io/MyGameBrowser-App/sitemap.xml

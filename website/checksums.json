@@ -1,0 +1,30 @@
+{
+  "version": "1.1.0",
+  "algorithm": "sha256",
+  "files": {
+    "Alienizor 1.1.0.exe": {
+      "sha256": "184c5765b1ffc49a954a9bcfcab0575e3749c621c41349b3a460e715943dd9b7",
+      "bytes": 79777342
+    },
+    "Alienizor Setup 1.1.0.exe": {
+      "sha256": "84e167c2b0ebf481cd57232576f53fdea766854233688b31a14058903dfa50f1",
+      "bytes": 79989836
+    },
+    "Alienizor+ 1.1.0.exe": {
+      "sha256": "b57bde20cb5b57881c36c1187a92f182ebccf9f89831d8078bd2dbe9d944bb5e",
+      "bytes": 82699184
+    },
+    "Alienizor+ Setup 1.1.0.exe": {
+      "sha256": "892202d0344eec33ba43e1f53c435b8d5e9f045fe56b3e84e64312220a0abf4f",
+      "bytes": 82911749
+    },
+    "Alienizor+-1.1.0-windows-portable.zip": {
+      "sha256": "62e4f3036d8a5c9ac7c522b5970f58570dfc2f57e0a0ab9eeccab3b05f0ac7d2",
+      "bytes": 116788576
+    },
+    "Alienizor-1.1.0-windows-portable.zip": {
+      "sha256": "00893d2fb0e2dac18c4202626f00c5d55ea89d63856400c85fb8d529ee09a36b",
+      "bytes": 112522873
+    }
+  }
+}
