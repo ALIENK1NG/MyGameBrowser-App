@@ -18,6 +18,12 @@ Alien-themed game browser and launcher for Windows — library, Live Lounge, fri
   <img src="website/assets/screenshots/lounge-preview.png" alt="Live Lounge" width="400">
 </p>
 
+<p align="center">
+  <img src="website/assets/screenshots/themes-preview.png" alt="Theme chooser" width="400">
+  &nbsp;
+  <img src="website/assets/screenshots/controller-preview.png" alt="Controller mode" width="400">
+</p>
+
 More on the [download site](https://alienk1ng.github.io/MyGameBrowser-App/#screenshots).
 
 ## Install (Chrome / any browser)
