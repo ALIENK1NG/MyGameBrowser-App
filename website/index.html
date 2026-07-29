@@ -41,7 +41,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/install.css?v=20260729-lightbox">
+  <link rel="stylesheet" href="css/install.css?v=20260729-lightbox2">
 </head>
 <body>
   <div class="stars" aria-hidden="true"></div>
@@ -326,15 +326,15 @@
     </footer>
   </div>
 
-  <div id="shotLightbox" class="shot-lightbox" hidden aria-hidden="true">
-    <button type="button" class="shot-lightbox-backdrop" id="shotLightboxBackdrop" aria-label="Close close-up view"></button>
-    <div class="shot-lightbox-dialog" role="dialog" aria-modal="true" aria-labelledby="shotLightboxCaption">
-      <button type="button" class="shot-lightbox-close" id="shotLightboxClose" aria-label="Close">×</button>
-      <img id="shotLightboxImg" src="" alt="">
-      <p id="shotLightboxCaption" class="shot-lightbox-caption"></p>
-    </div>
-  </div>
+  <dialog id="shotLightbox" class="shot-lightbox" aria-labelledby="shotLightboxCaption">
+    <form method="dialog" class="shot-lightbox-form">
+      <button type="submit" class="shot-lightbox-close" aria-label="Close close-up view">×</button>
+    </form>
+    <img id="shotLightboxImg" src="" alt="">
+    <p id="shotLightboxCaption" class="shot-lightbox-caption"></p>
+    <p class="shot-lightbox-tip">Press Esc or click outside to close</p>
+  </dialog>
 
-  <script src="js/install.js?v=20260729-lightbox" defer></script>
+  <script src="js/install.js?v=20260729-lightbox2" defer></script>
 </body>
 </html>
