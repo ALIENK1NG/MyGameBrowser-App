@@ -1,6 +1,24 @@
 # Alienizor+
 
+<p align="center">
+  <img src="website/assets/alienizor-logo.png" alt="Alienizor+ logo" width="160">
+</p>
+
 Alien-themed game browser and launcher for Windows — library, Live Lounge, friends, voice, and Discord Rich Presence.
+
+## Pictures
+
+<p align="center">
+  <img src="website/assets/screenshots/app-overview.png" alt="Alienizor+ app overview" width="820">
+</p>
+
+<p align="center">
+  <img src="website/assets/screenshots/library-preview.png" alt="Game library" width="400">
+  &nbsp;
+  <img src="website/assets/screenshots/lounge-preview.png" alt="Live Lounge" width="400">
+</p>
+
+More on the [download site](https://alienk1ng.github.io/MyGameBrowser-App/#screenshots).
 
 ## Install (Chrome / any browser)
 
