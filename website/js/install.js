@@ -387,48 +387,9 @@ async function init() {
 }
 
 function initScreenshotLightbox() {
-  const dialog = document.getElementById("shotLightbox");
-  const img = document.getElementById("shotLightboxImg");
-  const caption = document.getElementById("shotLightboxCaption");
-  if (!dialog || !img || typeof dialog.showModal !== "function") {
-    console.warn("Screenshot lightbox unavailable");
-    return;
-  }
-
-  const open = (src, alt, label) => {
-    if (!src) return;
-    img.src = src;
-    img.alt = alt || "";
-    if (caption) caption.textContent = label || alt || "Screenshot";
-    if (!dialog.open) dialog.showModal();
-  };
-
-  document.addEventListener("click", (e) => {
-    const btn = e.target.closest(".shot-zoom, .shot");
-    if (!btn) return;
-    // Prefer explicit zoom button; allow clicking figure chrome too
-    const zoom = btn.classList.contains("shot-zoom")
-      ? btn
-      : btn.querySelector(".shot-zoom");
-    if (!zoom) return;
-    // Ignore pure caption text clicks that aren't on the figure/button path with image intent
-    if (e.target.closest("a")) return;
-    e.preventDefault();
-    const src = zoom.getAttribute("data-lightbox-src") || zoom.querySelector("img")?.getAttribute("src");
-    const alt = zoom.getAttribute("data-lightbox-alt") || zoom.querySelector("img")?.getAttribute("alt") || "";
-    const label = zoom.closest("figure")?.querySelector("figcaption")?.textContent?.replace(/\s+/g, " ").trim();
-    open(src, alt, label);
-  });
-
-  dialog.addEventListener("click", (e) => {
-    // Click on backdrop (dialog itself, not children) closes
-    if (e.target === dialog) dialog.close();
-  });
-
-  dialog.addEventListener("close", () => {
-    img.removeAttribute("src");
-    if (caption) caption.textContent = "";
-  });
+  const root = document.getElementById("shotLightbox");
+  if (!root || root.dataset.wired === "1") return;
+  // Inline fallback in index.html may already wire this.
 }
 
 document.getElementById("heroDownloadBtn")?.addEventListener("click", (e) => {

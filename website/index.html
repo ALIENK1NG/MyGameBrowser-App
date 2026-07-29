@@ -41,7 +41,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/install.css?v=20260729-lightbox3">
+  <link rel="stylesheet" href="css/install.css?v=20260729-lightbox4">
 </head>
 <body>
   <div class="stars" aria-hidden="true"></div>
@@ -326,15 +326,54 @@
     </footer>
   </div>
 
-  <dialog id="shotLightbox" class="shot-lightbox" aria-labelledby="shotLightboxCaption">
-    <form method="dialog" class="shot-lightbox-form">
-      <button type="submit" class="shot-lightbox-close" aria-label="Close close-up view">×</button>
-    </form>
-    <img id="shotLightboxImg" src="" alt="">
-    <p id="shotLightboxCaption" class="shot-lightbox-caption"></p>
-    <p class="shot-lightbox-tip">Press Esc or click outside to close</p>
-  </dialog>
+  <div id="shotLightbox" class="shot-lightbox" hidden>
+    <button type="button" class="shot-lightbox-scrim" id="shotLightboxScrim" aria-label="Close close-up view"></button>
+    <div class="shot-lightbox-panel" role="dialog" aria-modal="true" aria-labelledby="shotLightboxCaption">
+      <button type="button" class="shot-lightbox-close" id="shotLightboxClose" aria-label="Close">×</button>
+      <img id="shotLightboxImg" src="" alt="">
+      <p id="shotLightboxCaption" class="shot-lightbox-caption"></p>
+      <p class="shot-lightbox-tip">Esc or click outside to close</p>
+    </div>
+  </div>
 
-  <script src="js/install.js?v=20260729-lightbox3" defer></script>
+  <script src="js/install.js?v=20260729-lightbox4" defer></script>
+  <script>
+    // Fallback if install.js is cached old: wire lightbox immediately.
+    (function () {
+      var root = document.getElementById("shotLightbox");
+      var img = document.getElementById("shotLightboxImg");
+      var caption = document.getElementById("shotLightboxCaption");
+      if (!root || !img || root.dataset.wired === "1") return;
+      root.dataset.wired = "1";
+      function close() {
+        root.hidden = true;
+        document.body.classList.remove("lightbox-open");
+        img.removeAttribute("src");
+      }
+      function open(src, alt, label) {
+        if (!src) return;
+        img.src = src;
+        img.alt = alt || "";
+        if (caption) caption.textContent = label || alt || "Screenshot";
+        root.hidden = false;
+        document.body.classList.add("lightbox-open");
+      }
+      document.addEventListener("click", function (e) {
+        var zoom = e.target.closest(".shot-zoom");
+        if (!zoom) return;
+        e.preventDefault();
+        open(
+          zoom.getAttribute("data-lightbox-src"),
+          zoom.getAttribute("data-lightbox-alt") || "",
+          (zoom.closest("figure") && zoom.closest("figure").querySelector("figcaption") || {}).textContent
+        );
+      });
+      document.getElementById("shotLightboxClose")?.addEventListener("click", close);
+      document.getElementById("shotLightboxScrim")?.addEventListener("click", close);
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape" && !root.hidden) close();
+      });
+    })();
+  </script>
 </body>
 </html>
