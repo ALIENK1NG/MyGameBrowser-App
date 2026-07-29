@@ -706,13 +706,18 @@ section {
 }
 
 .shot-lightbox {
-  padding: 0;
+  position: fixed;
+  inset: 0;
+  margin: auto;
+  padding: 1rem 1rem 1.25rem;
   border: none;
-  background: transparent;
-  max-width: none;
-  max-height: none;
+  border-radius: 16px;
+  background: #070b16;
   width: min(96vw, 1200px);
+  height: fit-content;
+  max-height: 96vh;
   color: var(--text);
+  box-shadow: 0 30px 100px rgba(0, 0, 0, 0.85);
 }
 
 .shot-lightbox::backdrop {
