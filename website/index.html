@@ -41,7 +41,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/install.css?v=20260729-lightbox4">
+  <link rel="stylesheet" href="css/install.css?v=20260729-lightbox5">
 </head>
 <body>
   <div class="stars" aria-hidden="true"></div>
@@ -330,48 +330,70 @@
     <button type="button" class="shot-lightbox-scrim" id="shotLightboxScrim" aria-label="Close close-up view"></button>
     <div class="shot-lightbox-panel" role="dialog" aria-modal="true" aria-labelledby="shotLightboxCaption">
       <button type="button" class="shot-lightbox-close" id="shotLightboxClose" aria-label="Close">×</button>
-      <img id="shotLightboxImg" src="" alt="">
+      <img id="shotLightboxImg" src="" alt="" width="1280" height="720">
       <p id="shotLightboxCaption" class="shot-lightbox-caption"></p>
       <p class="shot-lightbox-tip">Esc or click outside to close</p>
     </div>
   </div>
 
-  <script src="js/install.js?v=20260729-lightbox4" defer></script>
+  <script src="js/install.js?v=20260729-lightbox5" defer></script>
   <script>
-    // Fallback if install.js is cached old: wire lightbox immediately.
     (function () {
       var root = document.getElementById("shotLightbox");
       var img = document.getElementById("shotLightboxImg");
       var caption = document.getElementById("shotLightboxCaption");
       if (!root || !img || root.dataset.wired === "1") return;
       root.dataset.wired = "1";
+      // Keep overlay on <body> so position:fixed is never trapped by a parent.
+      if (root.parentElement !== document.body) document.body.appendChild(root);
+
+      var canClose = false;
       function close() {
+        if (!canClose) return;
         root.hidden = true;
         document.body.classList.remove("lightbox-open");
         img.removeAttribute("src");
+        canClose = false;
       }
       function open(src, alt, label) {
         if (!src) return;
-        img.src = src;
+        try {
+          img.src = new URL(src, window.location.href).href;
+        } catch (err) {
+          img.src = src;
+        }
         img.alt = alt || "";
-        if (caption) caption.textContent = label || alt || "Screenshot";
+        if (caption) caption.textContent = String(label || alt || "Screenshot").replace(/\s+/g, " ").trim();
         root.hidden = false;
         document.body.classList.add("lightbox-open");
+        canClose = false;
+        // Ignore the same click that opened the overlay.
+        setTimeout(function () { canClose = true; }, 250);
       }
       document.addEventListener("click", function (e) {
         var zoom = e.target.closest(".shot-zoom");
         if (!zoom) return;
         e.preventDefault();
+        e.stopPropagation();
+        var fig = zoom.closest("figure");
+        var cap = fig && fig.querySelector("figcaption");
         open(
-          zoom.getAttribute("data-lightbox-src"),
+          zoom.getAttribute("data-lightbox-src") || (zoom.querySelector("img") && zoom.querySelector("img").getAttribute("src")),
           zoom.getAttribute("data-lightbox-alt") || "",
-          (zoom.closest("figure") && zoom.closest("figure").querySelector("figcaption") || {}).textContent
+          cap ? cap.textContent : ""
         );
       });
-      document.getElementById("shotLightboxClose")?.addEventListener("click", close);
-      document.getElementById("shotLightboxScrim")?.addEventListener("click", close);
+      document.getElementById("shotLightboxClose").addEventListener("click", function (e) {
+        e.preventDefault();
+        canClose = true;
+        close();
+      });
+      document.getElementById("shotLightboxScrim").addEventListener("click", function () { close(); });
       document.addEventListener("keydown", function (e) {
-        if (e.key === "Escape" && !root.hidden) close();
+        if (e.key === "Escape" && !root.hidden) {
+          canClose = true;
+          close();
+        }
       });
     })();
   </script>
