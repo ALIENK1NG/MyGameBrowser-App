@@ -31,6 +31,10 @@ body {
   min-height: 100vh;
 }
 
+body.lightbox-open {
+  overflow: hidden;
+}
+
 .aurora {
   position: fixed;
   inset: 0;
@@ -662,6 +666,23 @@ section {
   grid-column: 1 / -1;
 }
 
+.shot-zoom {
+  display: block;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  border: none;
+  background: transparent;
+  cursor: zoom-in;
+  color: inherit;
+  font: inherit;
+}
+
+.shot-zoom:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
+}
+
 .shot img {
   display: block;
   width: 100%;
@@ -669,6 +690,7 @@ section {
   aspect-ratio: 16 / 9;
   object-fit: cover;
   object-position: top center;
+  pointer-events: none;
 }
 
 .shot figcaption {
@@ -677,6 +699,91 @@ section {
   color: var(--muted);
   letter-spacing: 0.03em;
   border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.shot-hint {
+  color: color-mix(in srgb, var(--accent) 75%, var(--muted));
+}
+
+.shot-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: grid;
+  place-items: center;
+  padding: 1.25rem;
+}
+
+.shot-lightbox[hidden] {
+  display: none !important;
+}
+
+.shot-lightbox-backdrop {
+  position: absolute;
+  inset: 0;
+  border: none;
+  padding: 0;
+  margin: 0;
+  cursor: zoom-out;
+  background: rgba(2, 4, 12, 0.82);
+  backdrop-filter: blur(6px);
+}
+
+.shot-lightbox-dialog {
+  position: relative;
+  z-index: 1;
+  max-width: min(96vw, 1280px);
+  max-height: 92vh;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  animation: lightbox-in 0.18s ease-out;
+}
+
+@keyframes lightbox-in {
+  from { opacity: 0; transform: scale(0.97); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.shot-lightbox-dialog img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: calc(92vh - 2.5rem);
+  object-fit: contain;
+  border-radius: 12px;
+  border: 1px solid color-mix(in srgb, var(--accent) 40%, transparent);
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.65);
+  background: #050510;
+}
+
+.shot-lightbox-caption {
+  margin: 0;
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.shot-lightbox-close {
+  position: absolute;
+  top: -0.35rem;
+  right: -0.35rem;
+  z-index: 2;
+  width: 2.4rem;
+  height: 2.4rem;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--accent) 45%, transparent);
+  background: #0b1020;
+  color: var(--text);
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+}
+
+.shot-lightbox-close:hover {
+  border-color: var(--accent);
+  color: var(--accent);
 }
 
 @media (max-width: 700px) {

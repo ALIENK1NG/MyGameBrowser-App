@@ -41,7 +41,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/install.css">
+  <link rel="stylesheet" href="css/install.css?v=20260729-lightbox">
 </head>
 <body>
   <div class="stars" aria-hidden="true"></div>
@@ -95,37 +95,43 @@
         <p class="section-sub">Tab groups, game library, and Live Lounge — neon command center vibes.</p>
         <div class="shot-grid">
           <figure class="shot shot-wide">
-            <img
-              src="assets/screenshots/app-overview.png"
-              width="1280"
-              height="720"
-              alt="Alienizor+ app overview with Tab Groups, tutorial, and LilAlien assistant"
-              loading="eager"
-              decoding="async"
-            >
-            <figcaption>Welcome tour · Tab Groups · LilAlien</figcaption>
+            <button type="button" class="shot-zoom" data-lightbox-src="assets/screenshots/app-overview.png" data-lightbox-alt="Alienizor+ app overview with Tab Groups, tutorial, and LilAlien assistant" aria-label="View welcome tour screenshot close up">
+              <img
+                src="assets/screenshots/app-overview.png"
+                width="1280"
+                height="720"
+                alt="Alienizor+ app overview with Tab Groups, tutorial, and LilAlien assistant"
+                loading="eager"
+                decoding="async"
+              >
+            </button>
+            <figcaption>Welcome tour · Tab Groups · LilAlien · <span class="shot-hint">Click to enlarge</span></figcaption>
           </figure>
           <figure class="shot">
-            <img
-              src="assets/screenshots/library-preview.png"
-              width="1280"
-              height="720"
-              alt="Alienizor+ game library shelf with neon cover grid"
-              loading="lazy"
-              decoding="async"
-            >
-            <figcaption>Game library</figcaption>
+            <button type="button" class="shot-zoom" data-lightbox-src="assets/screenshots/library-preview.png" data-lightbox-alt="Alienizor+ game library" aria-label="View game library screenshot close up">
+              <img
+                src="assets/screenshots/library-preview.png"
+                width="1280"
+                height="720"
+                alt="Alienizor+ game library shelf with neon cover grid"
+                loading="lazy"
+                decoding="async"
+              >
+            </button>
+            <figcaption>Game library · <span class="shot-hint">Click to enlarge</span></figcaption>
           </figure>
           <figure class="shot">
-            <img
-              src="assets/screenshots/lounge-preview.png"
-              width="1280"
-              height="720"
-              alt="Alienizor+ Live Lounge chat and voice panel"
-              loading="lazy"
-              decoding="async"
-            >
-            <figcaption>Live Lounge</figcaption>
+            <button type="button" class="shot-zoom" data-lightbox-src="assets/screenshots/lounge-preview.png" data-lightbox-alt="Alienizor+ Live Lounge" aria-label="View Live Lounge screenshot close up">
+              <img
+                src="assets/screenshots/lounge-preview.png"
+                width="1280"
+                height="720"
+                alt="Alienizor+ Live Lounge chat and voice panel"
+                loading="lazy"
+                decoding="async"
+              >
+            </button>
+            <figcaption>Live Lounge · <span class="shot-hint">Click to enlarge</span></figcaption>
           </figure>
         </div>
       </section>
@@ -320,6 +326,15 @@
     </footer>
   </div>
 
-  <script src="js/install.js?v=20260729-screenshots" defer></script>
+  <div id="shotLightbox" class="shot-lightbox" hidden aria-hidden="true">
+    <button type="button" class="shot-lightbox-backdrop" id="shotLightboxBackdrop" aria-label="Close close-up view"></button>
+    <div class="shot-lightbox-dialog" role="dialog" aria-modal="true" aria-labelledby="shotLightboxCaption">
+      <button type="button" class="shot-lightbox-close" id="shotLightboxClose" aria-label="Close">×</button>
+      <img id="shotLightboxImg" src="" alt="">
+      <p id="shotLightboxCaption" class="shot-lightbox-caption"></p>
+    </div>
+  </div>
+
+  <script src="js/install.js?v=20260729-lightbox" defer></script>
 </body>
 </html>

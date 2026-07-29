@@ -386,6 +386,57 @@ async function init() {
   }
 }
 
+function initScreenshotLightbox() {
+  const root = document.getElementById("shotLightbox");
+  const img = document.getElementById("shotLightboxImg");
+  const caption = document.getElementById("shotLightboxCaption");
+  const closeBtn = document.getElementById("shotLightboxClose");
+  const backdrop = document.getElementById("shotLightboxBackdrop");
+  if (!root || !img) return;
+
+  let lastFocus = null;
+
+  const close = () => {
+    root.hidden = true;
+    root.setAttribute("aria-hidden", "true");
+    document.body.classList.remove("lightbox-open");
+    img.removeAttribute("src");
+    if (caption) caption.textContent = "";
+    if (lastFocus && typeof lastFocus.focus === "function") lastFocus.focus();
+    lastFocus = null;
+  };
+
+  const open = (src, alt, label) => {
+    if (!src) return;
+    lastFocus = document.activeElement;
+    img.src = src;
+    img.alt = alt || "";
+    if (caption) caption.textContent = label || alt || "";
+    root.hidden = false;
+    root.setAttribute("aria-hidden", "false");
+    document.body.classList.add("lightbox-open");
+    closeBtn?.focus();
+  };
+
+  document.querySelectorAll(".shot-zoom").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const src = btn.getAttribute("data-lightbox-src");
+      const alt = btn.getAttribute("data-lightbox-alt") || "";
+      const label = btn.closest("figure")?.querySelector("figcaption")?.textContent?.replace(/\s+/g, " ").trim();
+      open(src, alt, label);
+    });
+  });
+
+  closeBtn?.addEventListener("click", close);
+  backdrop?.addEventListener("click", close);
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && !root.hidden) {
+      e.preventDefault();
+      close();
+    }
+  });
+}
+
 document.getElementById("heroDownloadBtn")?.addEventListener("click", (e) => {
   if (e.currentTarget.classList.contains("is-disabled")) {
     e.preventDefault();
@@ -393,4 +444,5 @@ document.getElementById("heroDownloadBtn")?.addEventListener("click", (e) => {
   }
 });
 
+initScreenshotLightbox();
 init();
