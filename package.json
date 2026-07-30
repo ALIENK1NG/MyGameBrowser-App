@@ -136,10 +136,16 @@
     },
     "nsis": {
       "oneClick": false,
+      "perMachine": false,
+      "selectPerMachineByDefault": true,
       "allowToChangeInstallationDirectory": true,
+      "allowElevation": true,
       "createDesktopShortcut": true,
       "createStartMenuShortcut": true,
-      "shortcutName": "Alienizor"
+      "shortcutName": "Alienizor",
+      "runAfterFinish": true,
+      "multiLanguageInstaller": true,
+      "include": "installer.nsh"
     },
     "protocols": [
       {
